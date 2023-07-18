@@ -1,0 +1,70 @@
+﻿.link.empirical.Penicillin_G, .link.empirical.Penicillin_V {
+    stroke: hsla(0, 60%, 80%, 0.9);
+}
+
+.link.empirical.Dicloxacillin, .link.empirical.Oxacillin {
+    /*stroke: #758002;*/
+    stroke: hsla(0, 60%, 65%, 0.9);
+}
+
+.link.empirical.Ampicillin, .link.empirical.Amoxicillin {
+    /*stroke: #758004;*/
+    stroke: hsla(0, 60%, 50%, 0.9);
+}
+
+.link.empirical.Amoxicillin_Clavulanate, .link.empirical.Ampicillin_Sulbactam {
+    stroke: hsla(0, 60%, 35%, 0.9);
+}
+
+.link.empirical.Piperacillin_Tazobactam, .link.empirical.Ticarcillin_Clavulanate {
+    stroke: hsla(0, 60%, 20%, 0.9);
+}
+
+.link.empirical.Imipenem_Cilastatin, .link.empirical.Meropenem, .link.empirical.Ertapenem, .link.empirical.Doripenem {
+    stroke: hsla(20, 60%, 50%, 0.9);
+}
+
+.link.empirical.Ciprofloxacin, .link.empirical.Levofloxacin, .link.empirical.Moxifloxacin {
+    stroke: hsla(40, 80%, 55%, 0.9);
+}
+
+.link.empirical.Cefazolin, .link.empirical.Cephalexin {
+    stroke: hsla(65, 60%, 45%, 0.9);
+}
+
+.link.empirical.Cefoxitin, .link.empirical.Cefuroxime {
+    stroke: hsla(80, 60%, 35%, 0.9);
+}
+
+.link.empirical.Cefotaxime, .link.empirical.Ceftriaxone, .link.empirical.Ceftazidime {
+    stroke: hsla(100, 70%, 30%, 0.9);
+}
+
+.link.empirical.Cefepime {
+    stroke: hsla(140, 70%, 20%, 0.9);
+}
+
+.link.empirical.Gentamicin, .link.empirical.Amikacin {
+    stroke: hsla(210, 90%, 30%, 0.9);
+}
+
+.link.empirical.Erythromycin, .link.empirical.Azithromycin, .link.empirical.Clarithromycin {
+    stroke: hsla(250, 90%, 40%, 0.9);
+}
+
+.link.empirical.Doxycycline, .link.empirical.Minocycline {
+    stroke: hsla(280, 60%, 30%, 0.9);
+}
+
+.link.empirical.Vancomycin, .link.empirical.Teicoplanin {
+    stroke: hsla(310, 60%, 40%, 0.9);
+}
+
+.link.empirical.Metronidazole {
+    stroke: hsla(330, 60%, 60%, 0.9);
+}
+
+.link.empirical.Chloramphenicol, .link.empirical.Clindamycin, .link.empirical.Tigecycline, .link.empirical.Daptomycin, .link.empirical.Fusidate, .link.empirical.Sulfamethoxazole_Trimethoprim, .link.empirical.Linezolid, .link.empirical.Colistin {
+    stroke: hsla(352, 60%, 40%, 0.9);
+}
+

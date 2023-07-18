@@ -1,0 +1,92 @@
+﻿body {
+    align-items:center;
+    background-color:white;
+    margin:0;
+    /*background-color:darkslategrey;*/
+    overflow:hidden;
+}
+
+svg {
+    height: 900px;
+    width:100%;
+    /*width: 1800px;*/
+    background-color: #000000;
+    padding: 10px;
+    /*margin-left:auto; 
+    margin-right:auto; 
+    margin-top:auto;
+    margin-bottom:auto;*/
+    display:block;
+}
+
+.node {
+    fill: white;
+    fill-opacity: 0.2;
+}
+.node.show {
+    fill-opacity:1;
+    box-shadow: 0px 0px 5px #fff;
+}
+.node.d,.node.dc{
+    fill:#804B00;
+}
+.link {
+    stroke-width: 1.3px;
+    /*stroke: #ffd800;*/
+    stroke:hsla(50, 100%, 50%, 0.9);
+    fill: none;
+    stroke-opacity: 0.03;
+}
+.link.initial.show{
+    stroke-opacity:0.3;
+}
+.link.show {
+    stroke-opacity:0.5;
+}
+
+.text {
+    fill:white;  /*"fill" is for svg text colr, but NOT "color" ! */
+    opacity:0.4;
+}
+.text.d{
+    font-family: 'Oxygen', sans-serif;
+    font-size:16px;
+    font-weight: 700; 
+}
+.text.dc{
+    font-family: 'Oxygen', sans-serif;
+    font-size:10px;
+    font-weight: 400; 
+}
+.text.p{
+    font-size:10px;
+    font-style: italic;
+}
+.text.p.show{
+    font-size:14px;
+    font-weight:bold;
+}
+.text.abx{
+    font-family: 'Oxygen', sans-serif;
+    font-size:10px;
+    font-weight: 700; 
+}
+.text.abx.empirical{
+    fill:yellow;
+    font-size:15px;
+    font-weight: 700; 
+}
+.text.show {
+    opacity:1;
+}
+
+#tooltip{
+    position:absolute;
+    width:250px;
+    height:500px;
+    /*stroke-width:5px;
+    stroke:white;*/
+    fill: #602f00;
+    opacity:0.5;
+    
+}

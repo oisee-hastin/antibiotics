@@ -1,0 +1,171 @@
+﻿.node.Penicillin_G {
+    fill: hsla(220, 100%, 50%, 0.9);
+}
+
+.node.Penicillin_V {
+    fill: #758001;
+}
+
+.node.Dicloxacillin {
+    fill: #758002;
+}
+
+.node.Oxacillin {
+    fill: #758003;
+}
+
+.node.Ampicillin {
+    fill: #758004;
+}
+
+.node.Amoxicillin {
+    fill: #758005;
+}
+
+.node.Amoxicillin_Clavulanate {
+    fill: #758006;
+}
+
+.node.Ampicillin_Sulbactam {
+    fill: #758007;
+}
+
+.node.Piperacillin_Tazobactam {
+    fill: #758008;
+}
+
+.node.Ticarcillin_Clavulanate {
+    fill: #758009;
+}
+
+.node.Imipenem_Cilastatin {
+    fill: #538000;
+}
+
+.node.Meropenem {
+    fill: #538000;
+}
+
+.node.Ertapenem {
+    fill: #538000;
+}
+
+.node.Doripenem {
+    fill: #538000;
+}
+
+.node.Ciprofloxacin {
+    fill: #007680;
+}
+
+.node.Levofloxacin {
+    fill: #007680;
+}
+
+.node.Moxifloxacin {
+    fill: #007680;
+}
+
+.node.Cefazolin {
+    fill: #005880;
+}
+
+.node.Cephalexin {
+    fill: #005880;
+}
+
+.node.Cefoxitin {
+    fill: #005880;
+}
+
+.node.Cefuroxime {
+    fill: #005880;
+}
+
+.node.Cefotaxime {
+    fill: #005880;
+}
+
+.node.Ceftriaxone {
+    fill: #005880;
+}
+
+.node.Ceftazidime {
+    fill: #005880;
+}
+
+.node.Cefepime {
+    fill: #005880;
+}
+
+.node.Gentamicin {
+    fill: #492680;
+}
+
+.node.Amikacin {
+    fill: #492680;
+}
+
+.node.Chloramphenicol {
+    fill: #80007B;
+}
+
+.node.Clindamycin {
+    fill: #87002F;
+}
+
+.node.Erythromycin {
+    fill: #B32F00;
+}
+
+.node.Azithromycin {
+    fill: #B32F00;
+}
+
+.node.Clarithromycin {
+    fill: #B32F00;
+}
+
+.node.Doxycycline {
+    fill: #804300;
+}
+
+.node.Minocycline {
+    fill: #804300;
+}
+
+.node.Tigecycline {
+    fill: #806600;
+}
+
+.node.Daptomycin {
+    fill: #8A9C00;
+}
+
+.node.Vancomycin {
+    fill: #466600;
+}
+
+.node.Teicoplanin {
+    fill: #466600;
+}
+
+.node.Fusidate {
+    fill: #0B4D00;
+}
+
+.node.Sulfamethoxazole_Trimethoprim {
+    fill: #006C4B;
+}
+
+.node.Metronidazole {
+    fill: #00788F;
+}
+
+.node.Linezolid {
+    fill: #00407C;
+}
+
+.node.Colistin {
+    fill: #4B009D;
+}

@@ -1,0 +1,469 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+
+    <!--<link href="css/black/abx.css" rel="stylesheet" />
+    <link href="css/black/black.css" rel="stylesheet" />
+    <link href="css/black/p.css" rel="stylesheet" />-->
+    <link href="css/white/white.css" rel="stylesheet" />
+    <link href="css/white/abx.css" rel="stylesheet" />
+    <link href="css/white/p.css" rel="stylesheet" />
+    <link href="css/white/empirical.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Oxygen:700,400' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:700italic,400italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Dancing+Script:700' rel='stylesheet' type='text/css'>
+    <script src="js/d3.min.js"></script>
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <!--<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>-->
+</head>
+<body style="background-image:url(img/bg.png)">
+    <!--<div id="a" class="c1">This is #a</div>
+    <div id="b" class="c1 c2">This is #b</div>-->
+    <!--<select id="list"></select>-->
+
+    <script>
+        var datafolder = "data/";
+        var default_group = "Head Neck";
+        var nodes, links;
+        var text_padding = 10, d_font_size = 12; p_font_size = 9, abx_font_size = 9;
+        var svg = d3.select("body").append("svg").attr("z-index", -100), svg_click = true;
+        var list = d3.select("#list");
+        //var abx_group;
+        var options;
+        //var is_click = false;
+        //draw tooltip_box
+        svg.on("click", function () { svg_click = true; show_all(); svg_click = false; });
+        var tooltip_container = d3.select("body").append("div").attr("id", "tooltip_container").style({ left: 1450 + "px", top: 30 + "px" });
+        tooltip_container.append("img").attr("src", "img/deco03.png");
+        tooltip_container.append("p").attr("id", "tooltip_text").html("<p>Information</p>");
+        tooltip_container.append("img").attr("src", "img/deco04.png");
+        //tooltip_container
+        //draw tooltip_box
+        //var draw_tooltip = function () {
+        //    var x1 = 1450, y1 = 0; //top
+        //    var x2 = 1450, y2 = 750;
+        //    var deco_width = 300, deco_height = 100;
+        //    svg.append("image")
+        //        .attr({
+        //            id: "deco_rt",
+        //            "xlink:href": "img/deco03.svg",
+        //            width: deco_width,
+        //            height: deco_height,
+        //            x: x1,
+        //            y: y1
+        //        });
+        //    svg.append("image")
+        //        .attr({
+        //            id: "deco_rb",
+        //            "xlink:href": "img/deco04.svg",
+        //            width: deco_width,
+        //            height: deco_height,
+        //            x: x2,
+        //            y: y2
+        //        });
+        //    //svg.append("rect").attr({
+        //    //    x: x,
+        //    //    y: y,
+        //    //    rx: 20,
+        //    //    ry: 20,
+        //    //    id: "tooltip_bg"
+        //    //});
+        //    var tooltip_container = d3.select("body").append("div").attr("id", "tooltip_container").style({ left: x1 + 10 + 50 + "px", top: y1 + deco_height + "px" });
+        //    tooltip_container.append("p").attr({ id: "tooltip_text" });
+        //};
+        var draw_menu = function () {
+            var x_align = 200; //all the menu element
+            var menu_font_size = 20;
+            var deco_width = 300, deco_height = deco_width / 8.6 //8.6 is the w/h ratio of svg picture
+            var mark_width = 42 * 0.7, mark_height = 52 * 0.7;
+            var padding = 20;
+            var line_width = 200;
+            var y = 10;
+            //decoration TOP
+            svg.append("image")
+                .attr({
+                    id: "deco_lt",
+                    "xlink:href": "img/deco01.svg",
+                    width: deco_width,
+                    height: deco_height,
+                    x: x_align - deco_width / 2,
+                    y: y
+                });
+            y = y + deco_height + padding * 1.5; //fine tuning 1.5
+            //append TEXT and LINE
+            for (var i in options) {
+                svg.append("text").attr({
+                    id: options[i].replace(/ /g, "_"),
+                    x: x_align,
+                    y: y + menu_font_size,
+                    "text-anchor": "middle"
+                }).text(options[i]).classed("menu", true)
+                    .on("mouseover", function () {
+                        d3.select("#mark").attr("y", d3.select(this).attr("y") - menu_font_size / 2 - mark_height / 2 + 5);
+                        svg_click = true;
+                        d3.selectAll("svg *").remove();
+                        default_group = d3.select(this).text();
+                        draw_all();
+                        svg_click = false;
+                    });
+                y = y + menu_font_size + padding * 1.5; //fine tuning 1.5
+                if (i < options.length - 1) {
+                    svg.append("path").attr({
+                        d: "M" + (x_align - line_width / 2) + " " + y + "H" + (x_align - line_width / 2 + line_width),
+                    }).classed("decoline", true);
+                    y = y + padding;
+                }
+            }
+            y = y + padding * 0.5; //fine tuning 0.5
+            //decoration BUTTOM
+            svg.append("image")
+                .attr({
+                    id: "deco_lb",
+                    "xlink:href": "img/deco02.svg",
+                    width: deco_width,
+                    height: deco_height,
+                    x: x_align - deco_width / 2,
+                    y: y
+                });
+            y = y + deco_height + padding * 1.5;
+            //copyright
+            svg.append("text").attr({
+                x: x_align,
+                y: y,
+                "text-anchor": "middle"
+            }).text("©2015 by OiSEE, Inc.").style("font-size", "9px");
+            //MARK
+            svg.append("image")
+                .attr({
+                    id: "mark",
+                    "xlink:href": "img/quill.png",
+                    width: mark_width,
+                    height: mark_height,
+                    x: x_align + deco_width / 2 - mark_width - 20,
+                    y: d3.select("#" + default_group.replace(/ /g, "_")).attr("y") - menu_font_size / 2 - mark_height / 2
+                })
+                .classed("show", true);
+        };
+        //draw node first, and then draw text
+        //text has NO id, just classes (equal to node's classes)
+        var draw_nodes_d = function () {
+            svg.selectAll("rect .d")
+                .data(nodes.filter(function (d) { return d.group == default_group }))
+                .enter()
+                .append("rect")
+                .attr({
+                    x: function (d) { return d.x; },
+                    y: function (d) { return d.y; },
+                    width: function (d) { return d.width; },
+                    height: function (d) { return d.height; },
+                    id: function (d) { return d.id; },
+                    source: function (d) { return d.source.join(" ") },
+                    target: function (d) { return d.target.join(" ") },
+                    tooltip: function (d) { return d.misc }
+                    //empirical: function (d) { return d.empirical;}
+                })
+                .attr("class", function (d) {
+                    if (d.height == 0) {
+                        return d.type.split().concat("show", "node", d.id, d.target).join(" ");
+                    } else {
+                        return d.type.split().concat("show", "node", d.id).join(" ");
+                    }
+                    //return d.target.concat("show", "node", d.type, d.id, d.source).join(" ");
+                })
+                .on("mouseover", function (d) {
+                    if (d.height == 0) return; //close the mouse event, if its height is equal to 0 (no bar showed on screen)
+                    show_all(false);
+                    show_part(d.id, "down", true); //just show one layer downward, the empirical abx was controlled below
+                    show_part(d.id, "up");
+                    //if (d.empirical[0] != null) d3.selectAll("#" + d.empirical.join(",#")).classed("empirical", true);
+                    if (d.primary[0] != null) {
+                        //console.log(d);
+                        var empirical = [].concat.apply([], d.primary);
+                        empirical = empirical.concat([].concat.apply([], d.alternative));
+                        //console.log(empirical);
+                        for (var i in d.target) {
+                            for (var j in empirical) {
+                                d3.select("." + d.target[i] + "." + empirical[j]).classed("show", true).classed("empirical", true);
+                                //class:empirical is for showing the link color as abx's one.
+                                d3.selectAll("#" + empirical[j]).classed("show", true);
+                            }
+                        }
+                    }
+                    d3.select("#tooltip_text").html(d3.select(this).attr("tooltip"));
+                })
+            //.on("mouseout", function () { if (!is_click) show_all() })
+            //.on("click", function (d) { is_click = true; d3.select(this).on("mouseover")(d); console.log(d.height);});
+            svg.selectAll("text .d")
+                .data(nodes.filter(function (d) { return d.group == default_group }))
+                .enter()
+                .append("text")
+                .attr({
+                    x: function (d) { return d.x - text_padding; },
+                    y: function (d) {
+                        if (d.height == 0)
+                            return d.y + d.height / 2 + d_font_size / 2 + 10;
+                        else
+                            return d.y + d.height / 2 + d_font_size / 2;
+                        //return d.y + d.height / 2 + d_font_size / 2;
+                    },
+                    "text-anchor": "end",
+                    id: function (d) { return d.id },
+                    tooltip: function (d) { return d.misc }
+                })
+                .attr("class", function (d) {
+                    if (d.height == 0) {
+                        return d.type.split().concat("show", "text", d.id, d.target).join(" "); //////////dddddddde
+                    } else {
+                        return d.type.split().concat("show", "text", d.id).join(" ");
+                    }
+                })
+                .text(function (d) { return d.name })
+                .on("mouseover", function (d) {
+                    if (d.height == 0) return; //close the mouse event, if its height is equal to 0 (no bar showed on screen)
+                    show_all(false);
+                    show_part(d.id, "down", true);
+                    show_part(d.id, "up");
+                    //if (d.empirical[0] != null) d3.selectAll("#" + d.empirical.join(",#")).classed("empirical", true);
+                    if (d.primary[0] != null) {
+                        var empirical = [].concat.apply([], d.primary);
+                        empirical = empirical.concat([].concat.apply([], d.alternative));
+                        for (var i in d.target) {
+                            for (var j in empirical) {
+                                //console.log(empirical[j]);
+                                d3.select("." + d.target[i] + "." + empirical[j]).classed("show", true);
+                                d3.selectAll("#" + empirical[j]).classed("show", true);
+                            }
+                        }
+                    }
+                    d3.select("#tooltip_text").html(d3.select(this).attr("tooltip"));
+                })
+        };
+        var draw_nodes_p = function () {
+            svg.selectAll("rect .p")
+                .data(nodes.filter(function (d) { return d.type == "p" }))
+                .enter()
+                .append("rect")
+                .attr({
+                    x: function (d) { return d.x; },
+                    y: function (d) { return d.y; },
+                    width: function (d) { return d.width; },
+                    height: function (d) { return d.height; },
+                    id: function (d) { return d.id; },
+                    source: function (d) { return d.source.join(" ") },
+                    target: function (d) { return d.target.join(" ") }
+                })
+                .attr("class", function (d) {
+                    return d.type.split().concat("show", "node", d.id, d.group).join(" ");
+                })
+                .on("mouseover", function (d) {
+                    if (d.height == 0) return; //close the mouse event, if its height is equal to 0 (no bar showed on screen)
+                    show_all(false);
+                    show_part(d.id, "down");
+                    show_part(d.id, "up");
+                });
+            //.on("mouseout", function () { show_all() });
+            svg.selectAll("text .p")
+                .data(nodes.filter(function (d) { return d.type == "p" }))
+                .enter()
+                .append("text")
+                .attr({
+                    x: function (d) { return d.x - text_padding; },
+                    //y: function (d) { return d.y + d.height / 2 + p_font_size / 2; },
+                    y: function (d) {
+                        if (d.height >= p_font_size - 2) { return d.y + p_font_size } else { return d.y + d.height / 2 + p_font_size / 2 };
+                    },
+                    id: function (d) { return d.id },
+                    "text-anchor": "end"
+                })
+                .attr("class", function (d) {
+                    return d.type.split().concat("show", "text", d.id).join(" ");
+                })
+                .text(function (d) { return d.name })
+                .on("mouseover", function (d) {
+                    if (d.height == 0) return; //close the mouse event, if its height is equal to 0 (no bar showed on screen)
+                    show_all(false);
+                    show_part(d.id, "down");
+                    show_part(d.id, "up");
+                });
+        };
+        var draw_nodes_abx = function () {
+            svg.selectAll("rect .abx")
+                .data(nodes.filter(function (d) { return d.type == "abx" }))
+                .enter()
+                .append("rect")
+                .attr({
+                    x: function (d) { return d.x; },
+                    y: function (d) { return d.y; },
+                    width: function (d) { return d.width; },
+                    height: function (d) { return d.height; },
+                    id: function (d) { return d.id; },
+                    source: function (d) { return d.source.join(" ") },
+                    target: function (d) { return d.target.join(" ") }
+                })
+                .attr("class", function (d) {
+                    return d.type.split().concat("show", "node", d.id).join(" ");
+                })
+                .on("mouseover", function (d) {
+                    if (d.height == 0) return; //close the mouse event, if its height is equal to 0 (no bar showed on screen)
+                    show_all(false);
+                    show_part(d.id, "up", true);
+                });
+            //.on("mouseout", function () { show_all() });
+            svg.selectAll("text .abx")
+                .data(nodes.filter(function (d) { return d.type == "abx" }))
+                .enter()
+                .append("text")
+                .attr({
+                    //x: function (d) { return d.x - text_padding; }, //show on left
+                    x: function (d) { return d.x + d.width + text_padding; }, //show on right
+                    y: function (d) { return d.y + d.height / 2 + p_font_size / 2; },
+                    id: function (d) { return d.id },
+                    //y: function (d) {
+                    //    if (d.height >= abx_font_size - 2) { return d.y + abx_font_size } else { return d.y + d.height / 2 + abx_font_size / 2 };
+                    //},
+                    //"text-anchor": "end"
+                    "text-anchor": "start"
+                })
+                .attr("class", function (d) {
+                    return d.type.split().concat("show", "text", d.id).join(" ");
+                })
+                .text(function (d) { return d.name })
+                .on("mouseover", function (d) {
+                    if (d.height == 0) return; //close the mouse event, if its height is equal to 0 (no bar showed on screen)
+                    show_all(false);
+                    show_part(d.id, "up", true);
+                });
+        };
+        var draw_links_dp = function () {
+            svg.selectAll("path .dp")
+                .data(links.filter(function (d) { return d.type == "dp" && d.group == default_group }))
+                .enter()
+                .append("path")
+                .attr({
+                    d: function (d) { return d.d },
+                    source: function (d) { return d.source },
+                    target: function (d) { return d.target }
+                })
+                .attr("class", function (d) {
+                    return d.type.split().concat("show", "link", d.source, d.target).join(" ");
+                })
+                .classed("initial", svg_click);
+
+        };
+        var draw_links_pa = function () {
+            svg.selectAll("path .pa")
+                .data(links.filter(function (d) { return d.type == "pa" }))
+                .enter()
+                .append("path")
+                .attr({
+                    d: function (d) { return d.d },
+                    source: function (d) { return d.source },
+                    target: function (d) { return d.target }
+                })
+                .attr("class", function (d) {
+                    var group = nodes.filter(function (g) { return g.id == d.source })[0].group;
+                    //console.log(group);
+                    return d.type.split().concat("show", "link", group, d.source, d.target).join(" ");
+                })
+                .classed("initial", svg_click);
+        };
+        var draw_nodes = function () { draw_nodes_d(); draw_nodes_p(); draw_nodes_abx(); };
+        var draw_links = function () { draw_links_dp(); draw_links_pa(); };
+        var draw_all = function () { draw_menu(); draw_links(); draw_nodes(); };
+        var show_all = function (x) { //true (default) > show all; false > fade all
+            x = typeof x == "boolean" ? x : true;
+            d3.selectAll("svg *").classed("show", x);
+            d3.selectAll(".link").classed("initial", svg_click);
+            d3.selectAll(".empirical").classed("empirical", false);
+            if (x) d3.select("#tooltip_text").html("<p>Information</p>");
+            //d3.selectAll(".node").classed("show", x);
+            //d3.selectAll(".link").classed("show", x);
+            //d3.selectAll(".text").classed("show", x);
+        };
+        var show_part = function (ids, orientation, onelayer) {
+            //recursive; U can asign orientation : up or down
+            //onelayer: just show one layer : true / false
+            //this function will draw (1)input nodes (2)links and (3) goal nodes, and then send goal nodes as the next input nodes
+            //the nodes will be drawn twice
+            if (typeof (ids) != "string" || ids == "" || ["up", "down"].indexOf(orientation) < 0) {
+                return
+            } else {
+                ids = "#" + ids.split(" ").join(",#");
+            };
+            onelayer = typeof onelayer == "boolean" ? onelayer : false;
+            d3.selectAll(ids).classed("show", true);
+            d3.selectAll(".link").classed("initial", false);
+            var goal_ids = "";
+            switch (orientation) {
+                case "up":
+                    d3.selectAll(".link").filter(function (d) { return $.inArray("#" + d.target, ids.split(",")) >= 0 }).classed("show", true);
+                    d3.selectAll(ids)
+                        .each(function (d, i) {
+                            var source = d3.select(this).attr("source");
+                            if (typeof (source) == "string" && source != "") goal_ids += " " + d3.select(this).attr("source");
+                        });
+                    break;
+                case "down":
+                    d3.selectAll(".link").filter(function (d) { return $.inArray("#" + d.source, ids.split(",")) >= 0 }).classed("show", true);
+                    d3.selectAll(ids)
+                        .each(function (d, i) {
+                            var target = d3.select(this).attr("target");
+                            if (typeof (target) == "string" && target != "") goal_ids += " " + d3.select(this).attr("target");
+                        });
+                    break;
+            }
+            if (goal_ids != "") {
+                goal_ids = goal_ids.trim();
+                d3.selectAll("#" + goal_ids.split(" ").join(",#")).classed("show", true);
+            }
+            //console.log("goal_ids:" + goal_ids + ":::::::::");
+            if (onelayer) return;
+            show_part(goal_ids, orientation);
+        };
+        d3.json(datafolder + "nodes.json", function (d) {
+            nodes = d;
+            options = d3.nest().key(function (d) { if (d.type == "d") return d.group; }).entries(nodes).filter(function (d) { return d.key != "undefined" });
+            options = d3.map(options, function (d) { return d.key }).keys();
+            //list.selectAll("option").data(options).enter().append("option")
+            //    //.attr("value", function (d) {return d.key })
+            //    .text(function (d) { return d.key });
+            //list.on("change", function () {
+            //    svg_click = true;
+            //    d3.selectAll("svg *").remove();
+            //    default_group = this.options[this.selectedIndex].text;
+            //    draw_all();
+            //    svg_click = false;
+            //});
+            //-------------
+            //nodes.forEach(function (d) {
+            //    if (d.height == 0) {
+            //        nodes.forEach(function (g) {
+            //            if (g.type == "dc" && d.target.indexOf(g.id) >= 0) {
+            //                d.target = d.target.concat(g.target);
+            //            }
+            //        });
+            //    };
+            //});
+            //-------------
+            abx_group = nodes.filter(function (d) { return d.type == "abx" });
+            abx_group = d3.map(abx_group, function (d) { return d.group }).keys();
+            //-------------
+            d3.json(datafolder + "links.json", function (d) {
+                links = d;
+                draw_all();
+            })
+
+        })
+        /*
+        var line = "M 0 0 C 40 40,60 40 100 0";
+        var svg = d3.select("body").append("svg");
+        svg.append("path").attr("d", line).attr("stroke-width",2).attr("stroke","blue").attr("fill","none");
+        */
+    </script>
+
+</body>
+
+</html>

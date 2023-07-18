@@ -1,0 +1,70 @@
+﻿.node.Penicillin_G, .node.Penicillin_V {
+    fill: hsla(0, 60%, 80%, 0.9);
+}
+
+.node.Dicloxacillin, .node.Oxacillin {
+    /*fill: #758002;*/
+    fill: hsla(0, 60%, 65%, 0.9);
+}
+
+.node.Ampicillin, .node.Amoxicillin {
+    /*fill: #758004;*/
+    fill: hsla(0, 60%, 50%, 0.9);
+}
+
+.node.Amoxicillin_Clavulanate, .node.Ampicillin_Sulbactam {
+    fill: hsla(0, 60%, 35%, 0.9);
+}
+
+.node.Piperacillin_Tazobactam, .node.Ticarcillin_Clavulanate {
+    fill: hsla(0, 60%, 20%, 0.9);
+}
+
+.node.Imipenem_Cilastatin, .node.Meropenem, .node.Ertapenem, .node.Doripenem {
+    fill: hsla(20, 60%, 50%, 0.9);
+}
+
+.node.Ciprofloxacin, .node.Levofloxacin, .node.Moxifloxacin {
+    fill: hsla(40, 80%, 55%, 0.9);
+}
+
+.node.Cefazolin, .node.Cephalexin {
+    fill: hsla(65, 60%, 45%, 0.9);
+}
+
+.node.Cefoxitin, .node.Cefuroxime {
+    fill: hsla(80, 60%, 35%, 0.9);
+}
+
+.node.Cefotaxime, .node.Ceftriaxone, .node.Ceftazidime {
+    fill: hsla(100, 70%, 30%, 0.9);
+}
+
+.node.Cefepime {
+    fill: hsla(140, 70%, 20%, 0.9);
+}
+
+.node.Gentamicin, .node.Amikacin {
+    fill: hsla(210, 90%, 30%, 0.9);
+}
+
+.node.Erythromycin, .node.Azithromycin, .node.Clarithromycin {
+    fill: hsla(250, 90%, 40%, 0.9);
+}
+
+.node.Doxycycline, .node.Minocycline {
+    fill: hsla(280, 60%, 30%, 0.9);
+}
+
+.node.Vancomycin, .node.Teicoplanin {
+    fill: hsla(310, 60%, 40%, 0.9);
+}
+
+.node.Metronidazole {
+    fill: hsla(330, 60%, 60%, 0.9);
+}
+
+.node.Chloramphenicol, .node.Clindamycin, .node.Tigecycline, .node.Daptomycin, .node.Fusidate, .node.Sulfamethoxazole_Trimethoprim, .node.Linezolid, .node.Colistin {
+    fill: hsla(352, 60%, 40%, 0.9);
+}
+

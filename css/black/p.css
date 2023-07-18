@@ -1,0 +1,37 @@
+﻿.node.GPC {
+    fill: #549BB3
+}
+.node.GPB {
+    fill: #3A89E6
+}
+.node.GNC {
+    fill:#D483E6
+}
+.node.GNB {
+    fill:#CC5F5A
+}
+.node.anaerobes {
+    fill:#845DB3
+}
+.node.misc {
+    fill:#6A8041
+}
+/*-----------------*/
+.link.GPC {
+    stroke: #549BB3
+}
+.link.GPB {
+    stroke: #3A89E6
+}
+.link.GNC {
+    stroke:#D483E6
+}
+.link.GNB {
+    stroke:#CC5F5A
+}
+.link.anaerobes {
+    stroke:#845DB3
+}
+.link.misc{
+    stroke:#6A8041
+}

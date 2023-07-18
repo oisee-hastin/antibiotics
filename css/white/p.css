@@ -1,0 +1,43 @@
+﻿.node.GPC {
+    /*fill: #549BB3*/
+    fill: hsla(195, 50%, 50%, 0.9);
+}
+.node.GPB {
+    /*fill: #3A89E6;*/
+    fill: hsla(215, 50%, 50%, 0.9);
+}
+.node.GNC {
+    /*fill:#D483E6;*/
+    fill: hsla(330, 50%, 50%, 0.9);
+}
+.node.GNB {
+    /*fill:#CC5F5A;*/
+    fill: hsla(360, 50%, 50%, 0.9);
+}
+.node.anaerobes {
+    /*fill:#845DB3;*/
+    fill: hsla(267, 50%, 40%, 0.9);
+}
+.node.misc {
+    /*fill:#6A8041;*/
+    fill: hsla(80, 50%, 30%, 0.9);
+}
+/*-----------------*/
+.link.GPC {
+    stroke: #549BB3
+}
+.link.GPB {
+    stroke: #3A89E6
+}
+.link.GNC {
+    stroke:#D483E6
+}
+.link.GNB {
+    stroke:#CC5F5A
+}
+.link.anaerobes {
+    stroke:#845DB3
+}
+.link.misc{
+    stroke:#6A8041
+}

@@ -1,0 +1,109 @@
+﻿body {
+    align-items:center;
+    /*background-color:darkslategrey;*/
+}
+
+svg {
+    height: 900px;
+    width: 1800px;
+    background-color: #B09FC2;
+    padding: 10px;
+    margin-left:auto; 
+    margin-right:auto; 
+    display:block;
+}
+
+.node {
+    fill-opacity: 0.1;
+}
+.node.show {
+    fill-opacity:0.7;
+}
+
+
+.link {
+    stroke-width: 1px;
+    stroke: gray;
+    fill: none;
+    stroke-opacity: 0.03;
+}
+.link.show {
+    stroke-opacity:0.5;
+}
+
+.text {
+    color:black;
+    opacity:0.2;
+}
+.text.d{
+    font-family: 'Oxygen', sans-serif;
+    font-size:14px;
+    font-weight: 700; 
+}
+.text.dc{
+    font-family: 'Oxygen', sans-serif;
+    font-size:10px;
+    font-weight: 400; 
+}
+.text.p{
+    font-size:10px;
+    font-style: italic;
+}
+.text.p.show{
+    font-size:15px;
+    font-weight:bold;
+}
+.text.abx{
+    font-family: 'Oxygen', sans-serif;
+    font-size:10px;
+    font-weight: 700; 
+}
+.text.abx.empirical{
+    font-size:18px;
+    font-weight: 700; 
+}
+.text.show {
+    opacity:1;
+}
+
+.link.GPC {
+    stroke: #468CCB;
+}
+.link.GPB {
+    stroke: #1C2C6F
+}
+.link.GNC {
+    stroke:#E7398E
+}
+.link.GNB {
+    stroke:#913634
+}
+.link.anaerobes {
+    stroke:#B09FC2
+}
+.link.misc {
+    stroke:#748F3D
+}
+
+.empirical{
+    color:blue;
+    fill:#a40000;
+}
+div {
+    width: 1800px;
+    height: 50px;
+}
+
+/*.c1 {
+    background-color: darkgoldenrod;
+}
+.c2{
+    background-color: antiquewhite;
+}
+.test{
+    background-color:black;
+}
+
+#menu {
+    margin-bottom: 10px;
+}*/
